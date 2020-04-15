@@ -2,9 +2,6 @@ package com.qa.ims.controller;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,16 +15,17 @@ import com.qa.ims.services.CustomerServices;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CustomerControllerTest {
-	
+
 	/**
-	 *  The thing I want to fake functionlity for
+	 * The thing I want to fake functionality for
 	 */
 	@Mock
 	private CustomerServices customerServices;
-	
+
 	/**
 	 * Spy is used because i want to mock some methods inside the item I'm testing
-	 * InjectMocks uses dependency injection to insert the mock into the customer controller
+	 * InjectMocks uses dependency injection to insert the mock into the customer
+	 * controller
 	 */
 	@Spy
 	@InjectMocks
@@ -60,25 +58,25 @@ public class CustomerControllerTest {
 	 */
 	@Test
 	public void updateTest() {
-		String id = "1";
-		String firstName = "Rhys";
-		String surname = "Thompson";
-		Mockito.doReturn(id, firstName, surname).when(customerController).getInput();
-		Customers customer = new Customers(1L, firstName, surname);
+		String customer_id = "1";
+		String name = "Rhys";
+		String address = "Moorside";
+		Mockito.doReturn(customer_id, name, address).when(customerController).getInput();
+		Customers customer = new Customers(1L, name, address);
 		Mockito.when(customerServices.update(customer)).thenReturn(customer);
 		assertEquals(customer, customerController.update());
 	}
-	
 
 	/**
-	 * Delete doesn't return anything, so we can just verify that it calls the delete method
+	 * Delete doesn't return anything, so we can just verify that it calls the
+	 * delete method
 	 */
 	@Test
 	public void deleteTest() {
-		String id = "1";
-		Mockito.doReturn(id).when(customerController).getInput();
+		String customer_id = "1";
+		Mockito.doReturn(customer_id).when(customerController).getInput();
 		customerController.delete();
 		Mockito.verify(customerServices, Mockito.times(1)).delete(1L);
 	}
-	
+
 }

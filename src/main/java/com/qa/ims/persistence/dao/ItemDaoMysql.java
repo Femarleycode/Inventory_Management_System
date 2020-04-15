@@ -22,7 +22,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	private String password;
 
 	public ItemDaoMysql(String username, String password) {
-		this.jdbcConnectionUrl = "jdbc:mysql://35.241.200.87:3306/ims";
+		this.jdbcConnectionUrl = "jdbc:mysql://35.187.9.217:3306/ims";
 		this.username = username;
 		this.password = password;
 	}
