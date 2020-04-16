@@ -42,7 +42,6 @@ public class Ims {
 
 		init(username, password);
 
-//		boolean loopswitch = false;
 		while (true) {
 			LOGGER.info("Which entity would you like to use?");
 			Domain.printDomains();
@@ -66,21 +65,24 @@ public class Ims {
 				ItemController itemController = new ItemController(
 						new ItemServices(new ItemDaoMysql(username, password)));
 				doAction(itemController, action);
+				break;
 			case ORDER:
 				OrderController orderController = new OrderController(
 						new OrderServices(new OrderDaoMysql(username, password)));
 				doAction(orderController, action);
+				break;
 			case ORDERLINE:
 				OrderLineController orderLineController = new OrderLineController(
 						new OrderLineServices(new OrderLineDaoMysql(username, password)));
 				doAction(orderLineController, action);
 				break;
-//			case STOP:
-//				break;
+
 			default:
 				break;
 			}
-//			loopswitch = true;
+			if (!action.name().equalsIgnoreCase("return")) {
+				LOGGER.info("Task finished.\n");
+			}
 		}
 
 	}
