@@ -40,11 +40,13 @@ public class OrderController implements CrudController<Orders> {
 	 */
 	@Override
 	public Orders create() {
-		LOGGER.info("Please enter an order_id");
-		Long order_id = Long.valueOf(getInput());
 		LOGGER.info("Please enter a customer_id");
-		BigDecimal customer_id = BigDecimal.valueOf(Double.parseDouble(getInput()));
-		Orders customers = orderService.create(new Orders(order_id, customer_id));
+		Long customer_id = Long.valueOf(getInput());
+		LOGGER.info("Please enter a total_price");
+		BigDecimal total_price = BigDecimal.valueOf(Double.parseDouble(getInput()));
+		LOGGER.info("Please enter a item_id");
+		Long item_id = Long.valueOf(getInput());
+		Orders customers = orderService.create(new Orders(customer_id, total_price, item_id));
 		LOGGER.info("Customers created");
 		return customers;
 	}
@@ -60,7 +62,9 @@ public class OrderController implements CrudController<Orders> {
 		Long customer_id = Long.valueOf(getInput());
 		LOGGER.info("Please enter a total_price");
 		BigDecimal total_price = BigDecimal.valueOf(Double.parseDouble(getInput()));
-		Orders orders = orderService.update(new Orders(order_id, customer_id, total_price));
+		LOGGER.info("Please enter a item_id");
+		Long item_id = Long.valueOf(getInput());
+		Orders orders = orderService.update(new Orders(order_id, customer_id, total_price, item_id));
 		LOGGER.info("Customers Updated");
 		return orders;
 	}

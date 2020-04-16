@@ -8,9 +8,9 @@ public class Items {
 	private String name;
 	private BigDecimal price;
 
-	public Items(BigDecimal Price, String name) {
+	public Items(BigDecimal price, String name) {
 		this.name = name;
-		this.price = Price;
+		this.price = price;
 	}
 
 	public Items(Long item_id, String name, BigDecimal price) {
@@ -39,8 +39,8 @@ public class Items {
 		return price;
 	}
 
-	public void setPrice(BigDecimal Price) {
-		this.price = Price;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 	public String toString() {
