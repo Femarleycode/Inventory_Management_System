@@ -15,12 +15,15 @@ import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
 import com.qa.ims.controller.ItemController;
 import com.qa.ims.controller.OrderController;
+import com.qa.ims.controller.OrderLineController;
 import com.qa.ims.persistence.dao.CustomerDaoMysql;
 import com.qa.ims.persistence.dao.ItemDaoMysql;
 import com.qa.ims.persistence.dao.OrderDaoMysql;
+import com.qa.ims.persistence.dao.OrderLineDaoMysql;
 import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.services.CustomerServices;
 import com.qa.ims.services.ItemServices;
+import com.qa.ims.services.OrderLineServices;
 import com.qa.ims.services.OrderServices;
 import com.qa.ims.utils.Utils;
 
@@ -39,33 +42,45 @@ public class Ims {
 
 		init(username, password);
 
-		LOGGER.info("Which entity would you like to use?");
-		Domain.printDomains();
+//		boolean loopswitch = false;
+		while (true) {
+			LOGGER.info("Which entity would you like to use?");
+			Domain.printDomains();
 
-		Domain domain = Domain.getDomain();
-		LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
+			Domain domain = Domain.getDomain();
+			if (domain.name().equalsIgnoreCase("stop")) {
+				break;
+			}
+			LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
 
-		Action.printActions();
-		Action action = Action.getAction();
+			Action.printActions();
+			Action action = Action.getAction();
 
-		switch (domain) {
-		case CUSTOMER:
-			CustomerController customerController = new CustomerController(
-					new CustomerServices(new CustomerDaoMysql(username, password)));
-			doAction(customerController, action);
-			break;
-		case ITEM:
-			ItemController itemController = new ItemController(new ItemServices(new ItemDaoMysql(username, password)));
-			doAction(itemController, action);
-		case ORDER:
-			OrderController orderController = new OrderController(
-					new OrderServices(new OrderDaoMysql(username, password)));
-			doAction(orderController, action);
-			break;
-		case STOP:
-			break;
-		default:
-			break;
+			switch (domain) {
+			case CUSTOMER:
+				CustomerController customerController = new CustomerController(
+						new CustomerServices(new CustomerDaoMysql(username, password)));
+				doAction(customerController, action);
+				break;
+			case ITEM:
+				ItemController itemController = new ItemController(
+						new ItemServices(new ItemDaoMysql(username, password)));
+				doAction(itemController, action);
+			case ORDER:
+				OrderController orderController = new OrderController(
+						new OrderServices(new OrderDaoMysql(username, password)));
+				doAction(orderController, action);
+			case ORDERLINE:
+				OrderLineController orderLineController = new OrderLineController(
+						new OrderLineServices(new OrderLineDaoMysql(username, password)));
+				doAction(orderLineController, action);
+				break;
+//			case STOP:
+//				break;
+			default:
+				break;
+			}
+//			loopswitch = true;
 		}
 
 	}

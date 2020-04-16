@@ -1,7 +1,7 @@
 Coverage: 34%
 # Project Title
 
-An application to create, create, update and delete records for a game store
+An application to create, read, update and delete records for a game store
 
 ## Getting Started
 
@@ -101,5 +101,5 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 **Christian Redfern** - *Also provided help with Java* - [Chrisctr](https://github.com/Chrisctr)
 
-# Lawservices_Management_System
-# Lawservices_Management_System
+# Inventory_Management_System
+# Inventory_Management_System
