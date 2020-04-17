@@ -46,7 +46,7 @@ public class ItemController implements CrudController<Items> {
 	public Items create() {
 		LOGGER.info("Please enter a name");
 		String name = getInput();
-		LOGGER.info("Please enter an price");
+		LOGGER.info("Please enter a price");
 		BigDecimal price = BigDecimal.valueOf(Double.parseDouble(getInput()));
 		Items item = itemService.create(new Items(name, price));
 		LOGGER.info("Items created");

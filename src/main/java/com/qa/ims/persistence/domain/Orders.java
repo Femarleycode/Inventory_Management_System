@@ -57,6 +57,7 @@ public class Orders {
 		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
+
 		return result;
 	}
 
