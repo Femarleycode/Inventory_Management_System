@@ -6,122 +6,124 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class OrderTest {
 
-	private Orders Order;
+	private Orders order;
 	private Orders other;
 
 	@Before
 	public void setUp() {
-		Order = new Orders(1L, 1L, "50");
-		other = new Orders(2L, 2L, "75");
+		order = new Orders(1L, 1L, BigDecimal.valueOf(50));
+		other = new Orders(1L, 1L, BigDecimal.valueOf(50));
 	}
 
 	@Test
 	public void settersTest() {
-		assertNotNull(Order.getOrderId());
-		assertNotNull(Order.getCustomerId());
-		assertNotNull(Order.getTotalPrice());
+		assertNotNull(order.getOrderId());
+		assertNotNull(order.getCustomerId());
+		assertNotNull(order.getTotalPrice());
 
-		Order.setOrderId(null);
-		assertNull(Order.getOrderId());
-		Order.setCustomerId(null);
-		assertNull(Order.getCustomerId());
-		Order.setTotalPrice(null);
-		assertNull(Order.getTotalPrice());
+		order.setOrderId(null);
+		assertNull(order.getOrderId());
+		order.setCustomerId(null);
+		assertNull(order.getCustomerId());
+		order.setTotalPrice(null);
+		assertNull(order.getTotalPrice());
 
 	}
 
 	@Test
 	public void equalsWithNull() {
-		assertFalse(Order.equals(null));
+		assertFalse(order.equals(null));
 	}
 
 	@Test
 	public void equalsWithDifferentObject() {
-		assertFalse(Order.equals(new Object()));
+		assertFalse(order.equals(new Object()));
 	}
 
 	@Test
 	public void createOrderWithId() {
-		assertEquals(1L, Order.getOrderId(), 0);
-		assertEquals("1", Order.getCustomerId());
-		assertEquals("50", Order.getTotalPrice());
+		assertEquals(1L, order.getOrderId(), 0);
+		assertEquals(1L, order.getCustomerId(), 0);
+		assertEquals(BigDecimal.valueOf(50), order.getTotalPrice());
 	}
 
 	@Test
 	public void checkEquality() {
-		assertTrue(Order.equals(Order));
+		assertTrue(order.equals(order));
 	}
 
 	@Test
 	public void checkEqualityBetweenDifferentObjects() {
-		assertTrue(Order.equals(other));
+		assertTrue(order.equals(other));
 	}
 
 	@Test
 	public void customerNameNullButOtherNameNotNull() {
-		Order.setCustomerId(null);
-		assertFalse(Order.equals(other));
+		order.setCustomerId(null);
+		assertFalse(order.equals(other));
 	}
 
 	@Test
-	public void customerNamesNotEqual() {
-		other.setCustomerId("1");
-		assertFalse(Order.equals(other));
+	public void OrderCustomerIdNotEqual() {
+		other.setCustomerId(2L);
+		assertFalse(order.equals(other));
 	}
 
 	@Test
 	public void checkEqualityBetweenDifferentObjectsNullName() {
-		Order.setCustomerId(null);
+		order.setCustomerId(null);
 		other.setCustomerId(null);
-		assertTrue(Order.equals(other));
+		assertTrue(order.equals(other));
 	}
 
 	@Test
 	public void nullId() {
-		Order.setOrderId(null);
-		assertFalse(Order.equals(other));
+		order.setOrderId(null);
+		assertFalse(order.equals(other));
 	}
 
 	@Test
 	public void nullIdOnBoth() {
-		Order.setOrderId(null);
+		order.setOrderId(null);
 		other.setOrderId(null);
-		assertTrue(Order.equals(other));
+		assertTrue(order.equals(other));
 	}
 
 	@Test
 	public void otherIdDifferent() {
 		other.setOrderId(2L);
-		assertFalse(Order.equals(other));
+		assertFalse(order.equals(other));
 	}
 
 	@Test
-	public void nullSurname() {
-		Order.setTotalPrice(null);
-		assertFalse(Order.equals(other));
+	public void nullPrice() {
+		order.setTotalPrice(null);
+		assertFalse(order.equals(other));
 	}
 
 	@Test
 	public void nullTotalPriceOnBoth() {
-		Order.setTotalPrice(null);
+		order.setTotalPrice(null);
 		other.setTotalPrice(null);
-		assertTrue(Order.equals(other));
+		assertTrue(order.equals(other));
 	}
 
 	@Test
 	public void otherTotalPriceDifferent() {
-		other.setTotalPrice("75");
-		assertFalse(Order.equals(other));
+		other.setTotalPrice(BigDecimal.valueOf(75));
+		assertFalse(order.equals(other));
 	}
 
 	@Test
 	public void constructorWithoutId() {
-		Orders customer = new Orders("1", "50");
+		Orders customer = new Orders(1L, BigDecimal.valueOf(50));
 		assertNull(customer.getOrderId());
 		assertNotNull(customer.getCustomerId());
 		assertNotNull(customer.getTotalPrice());
@@ -129,7 +131,7 @@ public class OrderTest {
 
 	@Test
 	public void hashCodeTest() {
-		assertEquals(Order.hashCode(), other.hashCode());
+		assertEquals(order.hashCode(), other.hashCode());
 	}
 
 	@Test
@@ -142,6 +144,6 @@ public class OrderTest {
 	@Test
 	public void toStringTest() {
 		String toString = "orderId:1 customerId:1 totalPrice:50";
-		assertEquals(toString, Order.toString());
+		assertEquals(toString, order.toString());
 	}
 }
