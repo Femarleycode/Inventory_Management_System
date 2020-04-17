@@ -17,11 +17,11 @@ public class Customers {
 		this.address = Address;
 	}
 
-	public Long getId() {
+	public Long getCustomerId() {
 		return customer_id;
 	}
 
-	public void setId(Long customer_id) {
+	public void setCustomerId(Long customer_id) {
 		this.customer_id = customer_id;
 	}
 

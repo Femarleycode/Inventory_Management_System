@@ -4,60 +4,60 @@ import java.math.BigDecimal;
 
 public class Orders {
 
-	private Long order_id;
-	private Long customer_id;
-	private BigDecimal total_price;
-	// private List<Long> item_id = new ArrayList<>();
+	private Long orderId;
+	private Long customerId;
+	private BigDecimal totalPrice;
 
-	public Orders(Long customer_id, BigDecimal total_price) {
-		this.customer_id = customer_id;
-		this.total_price = total_price;
+	public Orders(Long customerId, BigDecimal totalPrice) {
+		this.customerId = customerId;
+		this.totalPrice = totalPrice;
 	}
 
-	public Orders(Long order_id, Long customer_id, BigDecimal total_price) {
-		this.order_id = order_id;
-		this.customer_id = customer_id;
-		this.total_price = total_price;
+	public Orders(Long orderId, Long customerId, BigDecimal totalPrice) {
+		this.orderId = orderId;
+		this.customerId = customerId;
+		this.totalPrice = totalPrice;
 	}
 
-	// order_id
-	public Long getOrder_Id() {
-		return order_id;
+	// orderId
+	public Long getOrderId() {
+		return orderId;
 	}
 
-	public void setOrder_Id(Long order_id) {
-		this.order_id = order_id;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 
 	// cust_id
-	public Long getCustomer_Id() {
-		return customer_id;
+	public Long getCustomerId() {
+		return customerId;
 	}
 
-	public void setCustomer_Id(Long customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
-	// total_price
-	public BigDecimal getTotal_Price() {
-		return total_price;
+	// totalPrice
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setTotal_Price(BigDecimal total_price) {
-		this.total_price = total_price;
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public String toString() {
-		return "order_id:" + order_id + " customer_id:" + customer_id + " total_price:" + total_price;
+		return "orderId:" + orderId + " customerId:" + customerId + " totalPrice:" + totalPrice;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((order_id == null) ? 0 : order_id.hashCode());
-		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
-		result = prime * result + ((total_price == null) ? 0 : total_price.hashCode());
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
+
 		return result;
 	}
 
@@ -70,20 +70,20 @@ public class Orders {
 		if (getClass() != obj.getClass())
 			return false;
 		Orders other = (Orders) obj;
-		if (customer_id == null) {
-			if (other.customer_id != null)
+		if (customerId == null) {
+			if (other.customerId != null)
 				return false;
-		} else if (!customer_id.equals(other.customer_id))
+		} else if (!customerId.equals(other.customerId))
 			return false;
-		if (order_id == null) {
-			if (other.order_id != null)
+		if (orderId == null) {
+			if (other.orderId != null)
 				return false;
-		} else if (!order_id.equals(other.order_id))
+		} else if (!orderId.equals(other.orderId))
 			return false;
-		if (total_price == null) {
-			if (other.total_price != null)
+		if (totalPrice == null) {
+			if (other.totalPrice != null)
 				return false;
-		} else if (!total_price.equals(other.total_price))
+		} else if (!totalPrice.equals(other.totalPrice))
 			return false;
 		return true;
 	}

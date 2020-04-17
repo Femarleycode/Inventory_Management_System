@@ -2,6 +2,9 @@ package com.qa.ims.controller;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,34 +27,34 @@ public class CustomerControllerTest {
 
 	/**
 	 * Spy is used because i want to mock some methods inside the item I'm testing
-	 * InjectMocks uses dependency injection to insert the mock into the customer
+	 * InjectMocks uses dependency injection to insert the mock into the customers
 	 * controller
 	 */
 	@Spy
 	@InjectMocks
 	private CustomerController customerController;
 
-//	@Test
-//	public void readAllTest() {
-//		CustomerController customerController = new CustomerController(customerServices);
-//		List<Customer> customers = new ArrayList<>();
-//		customers.add(new Customer("Chris", "P"));
-//		customers.add(new Customer("Rhys", "T"));
-//		customers.add(new Customer("Nic", "J"));
-//		Mockito.when(customerServices.readAll()).thenReturn(customers);
-//		assertEquals(customers, customerController.readAll());
-//	}
+	@Test
+	public void readAllTest() {
+		CustomerController customerController = new CustomerController(customerServices);
+		List<Customers> icustomer = new ArrayList<>();
+		icustomer.add(new Customers("Chris", "P"));
+		icustomer.add(new Customers("Rhys", "T"));
+		icustomer.add(new Customers("Nic", "J"));
+		Mockito.when(customerServices.readAll()).thenReturn(icustomer);
+		assertEquals(icustomer, customerController.readAll());
+	}
 
-//	@Test
-//	public void createTest() {
-//		String firstName = "Chris";
-//		String surname = "Perrins";
-//		Mockito.doReturn(firstName, surname).when(customerController).getInput();
-//		Customer customer = new Customer(firstName, surname);
-//		Customer savedCustomer = new Customer(1L, "Chris", "Perrins");
-//		Mockito.when(customerServices.create(customer)).thenReturn(savedCustomer);
-//		assertEquals(savedCustomer, customerController.create());
-//	}
+	@Test
+	public void createTest() {
+		String name = "John";
+		String address = "Snowhouse";
+		Mockito.doReturn(name, address).when(customerController).getInput();
+		Customers customer = new Customers(name, address);
+		Customers savedCustomer = new Customers(1L, "John", "Snowhouse");
+		Mockito.when(customerServices.create(customer)).thenReturn(savedCustomer);
+		assertEquals(savedCustomer, customerController.create());
+	}
 
 	/**
 	 * 
@@ -62,7 +65,7 @@ public class CustomerControllerTest {
 		String name = "Rhys";
 		String address = "Moorside";
 		Mockito.doReturn(customer_id, name, address).when(customerController).getInput();
-		Customers customer = new Customers(1L, name, address);
+		Customers customer = new Customers(Long.parseLong(customer_id), name, address);
 		Mockito.when(customerServices.update(customer)).thenReturn(customer);
 		assertEquals(customer, customerController.update());
 	}
