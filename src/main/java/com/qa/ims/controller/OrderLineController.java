@@ -39,11 +39,11 @@ public class OrderLineController implements CrudController<OrderLine> {
 	 */
 	@Override
 	public OrderLine create() {
-		LOGGER.info("Please enter an order_id");
-		Long order_id = Long.valueOf(getInput());
-		LOGGER.info("Please enter an item_id");
-		Long item_id = Long.valueOf(getInput());
-		OrderLine customers = orderLineService.create(new OrderLine(order_id, item_id));
+		LOGGER.info("Please enter an orderId");
+		Long orderId = Long.valueOf(getInput());
+		LOGGER.info("Please enter an itemId");
+		Long itemId = Long.valueOf(getInput());
+		OrderLine customers = orderLineService.create(new OrderLine(orderId, itemId));
 		LOGGER.info("OrderLine created");
 		return customers;
 	}
@@ -53,11 +53,11 @@ public class OrderLineController implements CrudController<OrderLine> {
 	 */
 	@Override
 	public OrderLine update() {
-		LOGGER.info("Please enter the order_id of the orderLine you would like to update");
-		Long order_id = Long.valueOf(getInput());
-		LOGGER.info("Please enter a item_id");
-		Long item_id = Long.valueOf(getInput());
-		OrderLine orders = orderLineService.update(new OrderLine(order_id, item_id));
+		LOGGER.info("Please enter the orderId of the orderLine you would like to update");
+		Long orderId = Long.valueOf(getInput());
+		LOGGER.info("Please enter a itemId");
+		Long itemId = Long.valueOf(getInput());
+		OrderLine orders = orderLineService.update(new OrderLine(orderId, itemId));
 		LOGGER.info("OrderLine Updated");
 		return orders;
 	}
@@ -67,9 +67,9 @@ public class OrderLineController implements CrudController<OrderLine> {
 	 */
 	@Override
 	public void delete() {
-		LOGGER.info("Please enter the order_id of the orderLine you would like to delete");
-		Long order_id = Long.valueOf(getInput());
-		orderLineService.delete(order_id);
+		LOGGER.info("Please enter the orderId of the orderLine you would like to delete");
+		Long orderId = Long.valueOf(getInput());
+		orderLineService.delete(orderId);
 	}
 
 }

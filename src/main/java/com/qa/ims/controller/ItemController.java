@@ -59,12 +59,12 @@ public class ItemController implements CrudController<Items> {
 	@Override
 	public Items update() {
 		LOGGER.info("Please enter the id of the item you would like to update");
-		Long item_id = Long.valueOf(getInput());
+		Long itemId = Long.valueOf(getInput());
 		LOGGER.info("Please enter a name");
 		String name = getInput();
 		LOGGER.info("Please enter a price");
 		BigDecimal price = BigDecimal.valueOf(Double.parseDouble(getInput()));
-		Items item = itemService.update(new Items(item_id, name, price));
+		Items item = itemService.update(new Items(itemId, name, price));
 		LOGGER.info("Items Updated");
 		return item;
 	}
@@ -75,8 +75,8 @@ public class ItemController implements CrudController<Items> {
 	@Override
 	public void delete() {
 		LOGGER.info("Please enter the id of the item you would like to delete");
-		Long item_id = Long.valueOf(getInput());
-		itemService.delete(item_id);
+		Long itemId = Long.valueOf(getInput());
+		itemService.delete(itemId);
 	}
 
 }

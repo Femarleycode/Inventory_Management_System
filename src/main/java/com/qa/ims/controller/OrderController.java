@@ -40,11 +40,11 @@ public class OrderController implements CrudController<Orders> {
 	 */
 	@Override
 	public Orders create() {
-		LOGGER.info("Please enter a customer_id");
-		Long customer_id = Long.valueOf(getInput());
-		LOGGER.info("Please enter a total_price");
-		BigDecimal total_price = BigDecimal.valueOf(Double.parseDouble(getInput()));
-		Orders customers = orderService.create(new Orders(customer_id, total_price));
+		LOGGER.info("Please enter a customerId");
+		Long customerId = Long.valueOf(getInput());
+		LOGGER.info("Please enter a totalPrice");
+		BigDecimal totalPrice = BigDecimal.valueOf(Double.parseDouble(getInput()));
+		Orders customers = orderService.create(new Orders(customerId, totalPrice));
 		LOGGER.info("Customers created");
 		return customers;
 	}
@@ -54,13 +54,13 @@ public class OrderController implements CrudController<Orders> {
 	 */
 	@Override
 	public Orders update() {
-		LOGGER.info("Please enter the order_id of the order you would like to update");
-		Long order_id = Long.valueOf(getInput());
-		LOGGER.info("Please enter a customer_id");
-		Long customer_id = Long.valueOf(getInput());
-		LOGGER.info("Please enter a total_price");
-		BigDecimal total_price = BigDecimal.valueOf(Double.parseDouble(getInput()));
-		Orders orders = orderService.update(new Orders(order_id, customer_id, total_price));
+		LOGGER.info("Please enter the orderId of the order you would like to update");
+		Long orderId = Long.valueOf(getInput());
+		LOGGER.info("Please enter a customerId");
+		Long customerId = Long.valueOf(getInput());
+		LOGGER.info("Please enter a totalPrice");
+		BigDecimal totalPrice = BigDecimal.valueOf(Double.parseDouble(getInput()));
+		Orders orders = orderService.update(new Orders(orderId, customerId, totalPrice));
 		LOGGER.info("Customers Updated");
 		return orders;
 	}
@@ -71,8 +71,8 @@ public class OrderController implements CrudController<Orders> {
 	@Override
 	public void delete() {
 		LOGGER.info("Please enter the id of the orders you would like to delete");
-		Long order_id = Long.valueOf(getInput());
-		orderService.delete(order_id);
+		Long orderId = Long.valueOf(getInput());
+		orderService.delete(orderId);
 	}
 
 }

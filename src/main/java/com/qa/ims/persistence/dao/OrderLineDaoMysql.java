@@ -33,9 +33,9 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	}
 
 	OrderLine orderFromResultSet(ResultSet resultSet) throws SQLException {
-		Long order_id = resultSet.getLong("order_id");
-		Long item_id = resultSet.getLong("item_id");
-		return new OrderLine(order_id, item_id);
+		Long orderId = resultSet.getLong("order_id");
+		Long itemId = resultSet.getLong("item_id");
+		return new OrderLine(orderId, itemId);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("insert into orders(customer_id, total_price, item_id) values('"
-					+ order.getOrder_Id() + "','" + order.getItem_Id() + "')");
+					+ order.getOrderId() + "','" + order.getItemId() + "')");
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -94,10 +94,10 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 		return null;
 	}
 
-	public OrderLine readOrderLine(Long order_id) {
+	public OrderLine readOrderLine(Long orderId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orderline where order_id = " + order_id);) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM orderline where order_id = " + orderId);) {
 			resultSet.next();
 			return orderFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -118,9 +118,9 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	public OrderLine update(OrderLine order) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update orderline set item_id ='" + order.getItem_Id() + "' where order_id ="
-					+ order.getOrder_Id());
-			return readOrderLine(order.getOrder_Id());
+			statement.executeUpdate(
+					"update orderline set item_id ='" + order.getItemId() + "' where order_id =" + order.getOrderId());
+			return readOrderLine(order.getOrderId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
@@ -134,10 +134,10 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	 * @param id - id of the order
 	 */
 	@Override
-	public void delete(long order_id) {
+	public void delete(long orderId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from orderline where order_id = " + order_id);
+			statement.executeUpdate("delete from orderline where order_id = " + orderId);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

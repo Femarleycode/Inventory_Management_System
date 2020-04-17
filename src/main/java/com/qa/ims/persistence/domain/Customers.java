@@ -2,7 +2,7 @@ package com.qa.ims.persistence.domain;
 
 public class Customers {
 
-	private Long customer_id;
+	private Long customerId;
 	private String name;
 	private String address;
 
@@ -11,18 +11,18 @@ public class Customers {
 		this.address = Address;
 	}
 
-	public Customers(Long customer_id, String name, String Address) {
-		this.customer_id = customer_id;
+	public Customers(Long customerId, String name, String Address) {
+		this.customerId = customerId;
 		this.name = name;
 		this.address = Address;
 	}
 
 	public Long getCustomerId() {
-		return customer_id;
+		return customerId;
 	}
 
-	public void setCustomerId(Long customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getName() {
@@ -42,7 +42,7 @@ public class Customers {
 	}
 
 	public String toString() {
-		return "id:" + customer_id + " name:" + name + " address:" + address;
+		return "id:" + customerId + " name:" + name + " address:" + address;
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class Customers {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		return result;
 	}
@@ -69,10 +69,10 @@ public class Customers {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (customer_id == null) {
-			if (other.customer_id != null)
+		if (customerId == null) {
+			if (other.customerId != null)
 				return false;
-		} else if (!customer_id.equals(other.customer_id))
+		} else if (!customerId.equals(other.customerId))
 			return false;
 		if (address == null) {
 			if (other.address != null)

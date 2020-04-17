@@ -58,12 +58,12 @@ public class CustomerController implements CrudController<Customers> {
 	@Override
 	public Customers update() {
 		LOGGER.info("Please enter the id of the customers you would like to update");
-		Long customer_id = Long.valueOf(getInput());
+		Long CustomerId = Long.valueOf(getInput());
 		LOGGER.info("Please enter a name");
 		String name = getInput();
 		LOGGER.info("Please enter an address");
 		String address = getInput();
-		Customers customers = customerService.update(new Customers(customer_id, name, address));
+		Customers customers = customerService.update(new Customers(CustomerId, name, address));
 		LOGGER.info("Customers Updated");
 		return customers;
 	}
