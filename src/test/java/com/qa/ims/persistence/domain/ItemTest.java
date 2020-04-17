@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,8 +18,8 @@ public class ItemTest {
 
 	@Before
 	public void setUp() {
-		item = new Items(1L, "Nokia", "50");
-		other = new Items(1L, "Nokia", "50");
+		item = new Items(1L, "Nokia", BigDecimal.valueOf(50));
+		other = new Items(1L, "Nokia", BigDecimal.valueOf(50));
 	}
 
 	@Test
@@ -46,10 +48,10 @@ public class ItemTest {
 	}
 
 	@Test
-	public void createCustomerWithId() {
+	public void createItemWithItemId() {
 		assertEquals(1L, item.getItemId(), 0);
 		assertEquals("Nokia", item.getName());
-		assertEquals("50", item.getPrice());
+		assertEquals(BigDecimal.valueOf(50), item.getPrice());
 	}
 
 	@Test
@@ -115,13 +117,13 @@ public class ItemTest {
 
 	@Test
 	public void otherPriceDifferent() {
-		other.setPrice("75");
+		other.setPrice(BigDecimal.valueOf(75));
 		assertFalse(item.equals(other));
 	}
 
 	@Test
-	public void constructorWithoutId() {
-		Items customer = new Items("John", "50");
+	public void constructorWithoutItemId() {
+		Items customer = new Items("Nokia", BigDecimal.valueOf(50));
 		assertNull(customer.getItemId());
 		assertNotNull(customer.getName());
 		assertNotNull(customer.getPrice());
@@ -141,7 +143,7 @@ public class ItemTest {
 
 	@Test
 	public void toStringTest() {
-		String toString = "id:1 name:John address:Moorside";
+		String toString = "itemId:1 name:Nokia price:50";
 		assertEquals(toString, item.toString());
 	}
 }

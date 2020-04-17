@@ -39,9 +39,9 @@ public class ItemControllerTest {
 	public void readAllTest() {
 		ItemController itemController = new ItemController(itemServices);
 		List<Items> items = new ArrayList<>();
-		items.add(new Items("Nokia", "50"));
-		items.add(new Items("Samsung", "75"));
-		items.add(new Items("iPhone", "100"));
+		items.add(new Items("Nokia", BigDecimal.valueOf(50)));
+		items.add(new Items("Samsung", BigDecimal.valueOf(75)));
+		items.add(new Items("iPhone", BigDecimal.valueOf(100)));
 		Mockito.when(itemServices.readAll()).thenReturn(items);
 		assertEquals(items, itemController.readAll());
 	}
@@ -53,7 +53,7 @@ public class ItemControllerTest {
 
 		Mockito.doReturn(name, price).when(itemController).getInput();
 		Items item = new Items(name, BigDecimal.valueOf(Double.parseDouble(price)));
-		Items savedItem = new Items(1L, "Nokia", "50");
+		Items savedItem = new Items(1L, "Nokia", BigDecimal.valueOf(50));
 
 		Mockito.when(itemServices.create(item)).thenReturn(savedItem);
 		assertEquals(savedItem, itemController.create());

@@ -2,6 +2,7 @@ package com.qa.ims.controller;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 import com.qa.ims.persistence.domain.Orders;
 import com.qa.ims.services.OrderServices;
 
@@ -38,10 +38,10 @@ public class OrderControllerTest {
 	@Test
 	public void readAllTest() {
 		OrderController customerController = new OrderController(OrderServices);
-		List<Order> iOrder = new ArrayList<>();
-		iOrder.add(new Orders("Chris", "50"));
-		iOrder.add(new Orders("Rhys", "75"));
-		iOrder.add(new Orders("Nic", "100"));
+		List<Orders> iOrder = new ArrayList<>();
+		iOrder.add(new Orders(1L, BigDecimal.valueOf(50)));
+		iOrder.add(new Orders(2L, BigDecimal.valueOf(75)));
+		iOrder.add(new Orders(3L, BigDecimal.valueOf(100)));
 		Mockito.when(OrderServices.readAll()).thenReturn(iOrder);
 		assertEquals(iOrder, customerController.readAll());
 	}
@@ -51,8 +51,8 @@ public class OrderControllerTest {
 		String customer_id = "1";
 		String total_price = "50";
 		Mockito.doReturn(customer_id, total_price).when(OrderController).getInput();
-		Orders customer = new Orders(customer_id, total_price);
-		Orders savedCustomer = new Orders(1L, "Chris", "50");
+		Orders customer = new Orders(Long.valueOf(customer_id), BigDecimal.valueOf(Double.parseDouble(total_price)));
+		Orders savedCustomer = new Orders(1L, 1L, BigDecimal.valueOf(50));
 		Mockito.when(OrderServices.create(customer)).thenReturn(savedCustomer);
 		assertEquals(savedCustomer, OrderController.create());
 	}
@@ -63,10 +63,12 @@ public class OrderControllerTest {
 	@Test
 	public void updateTest() {
 		String order_id = "1";
-		String customer_id = "Rhys";
+		String customer_id = "1";
 		String total_price = "75";
 		Mockito.doReturn(order_id, customer_id, total_price).when(OrderController).getInput();
-		Orders customer = new Orders(1L, customer_id, total_price);
+		Orders customer = new Orders(1L, Long.valueOf(customer_id),
+				BigDecimal.valueOf(Double.parseDouble(total_price)));
+
 		Mockito.when(OrderServices.update(customer)).thenReturn(customer);
 		assertEquals(customer, OrderController.update());
 	}
