@@ -3,6 +3,8 @@ package com.qa.ims.controller;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,27 +35,29 @@ public class ItemControllerTest {
 	@InjectMocks
 	private ItemController itemController;
 
-//	@Test
-//	public void readAllTest() {
-//		ItemController itemController = new ItemController(itemServices);
-//		List<Item> items = new ArrayList<>();
-//		items.add(new Item("Chris", "P"));
-//		items.add(new Item("Rhys", "T"));
-//		items.add(new Item("Nic", "J"));
-//		Mockito.when(itemServices.readAll()).thenReturn(items);
-//		assertEquals(items, itemController.readAll());
-//	}
+	@Test
+	public void readAllTest() {
+		ItemController itemController = new ItemController(itemServices);
+		List<Items> items = new ArrayList<>();
+		items.add(new Items("Nokia", "50"));
+		items.add(new Items("Samsung", "75"));
+		items.add(new Items("iPhone", "100"));
+		Mockito.when(itemServices.readAll()).thenReturn(items);
+		assertEquals(items, itemController.readAll());
+	}
 
-//	@Test
-//	public void createTest() {
-//		String firstName = "Chris";
-//		String surname = "Perrins";
-//		Mockito.doReturn(firstName, surname).when(itemController).getInput();
-//		Item item = new Item(firstName, surname);
-//		Item savedItem = new Item(1L, "Chris", "Perrins");
-//		Mockito.when(itemServices.create(item)).thenReturn(savedItem);
-//		assertEquals(savedItem, itemController.create());
-//	}
+	@Test
+	public void createTest() {
+		String name = "Nokia";
+		String price = "50";
+
+		Mockito.doReturn(name, price).when(itemController).getInput();
+		Items item = new Items(name, BigDecimal.valueOf(Double.parseDouble(price)));
+		Items savedItem = new Items(1L, "Nokia", "50");
+
+		Mockito.when(itemServices.create(item)).thenReturn(savedItem);
+		assertEquals(savedItem, itemController.create());
+	}
 
 	/**
 	 * 
@@ -61,10 +65,12 @@ public class ItemControllerTest {
 	@Test
 	public void updateTest() {
 		String item_id = "1";
-		String name = "Rhys";
+		String name = "Nokia";
 		String price = "50";
+
 		Mockito.doReturn(item_id, name, price).when(itemController).getInput();
 		Items item = new Items(Long.parseLong(item_id), name, BigDecimal.valueOf(Double.parseDouble(price)));
+
 		Mockito.when(itemServices.update(item)).thenReturn(item);
 		assertEquals(item, itemController.update());
 	}

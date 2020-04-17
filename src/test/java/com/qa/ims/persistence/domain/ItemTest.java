@@ -11,137 +11,137 @@ import org.junit.Test;
 
 public class ItemTest {
 
-	private Customers customer;
-	private Customers other;
+	private Items item;
+	private Items other;
 
 	@Before
 	public void setUp() {
-		customer = new Customers(1L, "John", "Moorside");
-		other = new Customers(1L, "John", "Moorside");
+		item = new Items(1L, "Nokia", "50");
+		other = new Items(1L, "Nokia", "50");
 	}
 
 	@Test
 	public void settersTest() {
-		assertNotNull(customer.getId());
-		assertNotNull(customer.getName());
-		assertNotNull(customer.getAddress());
+		assertNotNull(item.getItemId());
+		assertNotNull(item.getName());
+		assertNotNull(item.getPrice());
 
-		customer.setId(null);
-		assertNull(customer.getId());
-		customer.setName(null);
-		assertNull(customer.getName());
-		customer.setAddress(null);
-		assertNull(customer.getAddress());
+		item.setItemId(null);
+		assertNull(item.getItemId());
+		item.setName(null);
+		assertNull(item.getName());
+		item.setPrice(null);
+		assertNull(item.getPrice());
 
 	}
 
 	@Test
 	public void equalsWithNull() {
-		assertFalse(customer.equals(null));
+		assertFalse(item.equals(null));
 	}
 
 	@Test
 	public void equalsWithDifferentObject() {
-		assertFalse(customer.equals(new Object()));
+		assertFalse(item.equals(new Object()));
 	}
 
 	@Test
 	public void createCustomerWithId() {
-		assertEquals(1L, customer.getId(), 0);
-		assertEquals("John", customer.getName());
-		assertEquals("Moorside", customer.getAddress());
+		assertEquals(1L, item.getItemId(), 0);
+		assertEquals("Nokia", item.getName());
+		assertEquals("50", item.getPrice());
 	}
 
 	@Test
 	public void checkEquality() {
-		assertTrue(customer.equals(customer));
+		assertTrue(item.equals(item));
 	}
 
 	@Test
 	public void checkEqualityBetweenDifferentObjects() {
-		assertTrue(customer.equals(other));
+		assertTrue(item.equals(other));
 	}
 
 	@Test
 	public void customerNameNullButOtherNameNotNull() {
-		customer.setName(null);
-		assertFalse(customer.equals(other));
+		item.setName(null);
+		assertFalse(item.equals(other));
 	}
 
 	@Test
 	public void customerNamesNotEqual() {
-		other.setName("rhys");
-		assertFalse(customer.equals(other));
+		other.setName("samsung");
+		assertFalse(item.equals(other));
 	}
 
 	@Test
 	public void checkEqualityBetweenDifferentObjectsNullName() {
-		customer.setName(null);
+		item.setName(null);
 		other.setName(null);
-		assertTrue(customer.equals(other));
+		assertTrue(item.equals(other));
 	}
 
 	@Test
 	public void nullId() {
-		customer.setId(null);
-		assertFalse(customer.equals(other));
+		item.setItemId(null);
+		assertFalse(item.equals(other));
 	}
 
 	@Test
 	public void nullIdOnBoth() {
-		customer.setId(null);
-		other.setId(null);
-		assertTrue(customer.equals(other));
+		item.setItemId(null);
+		other.setItemId(null);
+		assertTrue(item.equals(other));
 	}
 
 	@Test
 	public void otherIdDifferent() {
-		other.setId(2L);
-		assertFalse(customer.equals(other));
+		other.setItemId(2L);
+		assertFalse(item.equals(other));
 	}
 
 	@Test
-	public void nullSurname() {
-		customer.setAddress(null);
-		assertFalse(customer.equals(other));
+	public void nullPrice() {
+		item.setPrice(null);
+		assertFalse(item.equals(other));
 	}
 
 	@Test
-	public void nullSurnameOnBoth() {
-		customer.setAddress(null);
-		other.setAddress(null);
-		assertTrue(customer.equals(other));
+	public void nullPriceOnBoth() {
+		item.setPrice(null);
+		other.setPrice(null);
+		assertTrue(item.equals(other));
 	}
 
 	@Test
-	public void otherSurnameDifferent() {
-		other.setAddress("thompson");
-		assertFalse(customer.equals(other));
+	public void otherPriceDifferent() {
+		other.setPrice("75");
+		assertFalse(item.equals(other));
 	}
 
 	@Test
 	public void constructorWithoutId() {
-		Customers customer = new Customers("John", "Moorside");
-		assertNull(customer.getId());
+		Items customer = new Items("John", "50");
+		assertNull(customer.getItemId());
 		assertNotNull(customer.getName());
-		assertNotNull(customer.getAddress());
+		assertNotNull(customer.getPrice());
 	}
 
 	@Test
 	public void hashCodeTest() {
-		assertEquals(customer.hashCode(), other.hashCode());
+		assertEquals(item.hashCode(), other.hashCode());
 	}
 
 	@Test
 	public void hashCodeTestWithNull() {
-		Customers customer = new Customers(null, null);
-		Customers other = new Customers(null, null);
+		Items customer = new Items(null, null);
+		Items other = new Items(null, null);
 		assertEquals(customer.hashCode(), other.hashCode());
 	}
 
 	@Test
 	public void toStringTest() {
 		String toString = "id:1 name:John address:Moorside";
-		assertEquals(toString, customer.toString());
+		assertEquals(toString, item.toString());
 	}
 }

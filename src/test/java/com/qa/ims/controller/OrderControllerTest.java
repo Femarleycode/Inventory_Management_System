@@ -2,6 +2,9 @@ package com.qa.ims.controller;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,8 +13,9 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.qa.ims.persistence.domain.Customers;
-import com.qa.ims.services.CustomerServices;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
+import com.qa.ims.persistence.domain.Orders;
+import com.qa.ims.services.OrderServices;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OrderControllerTest {
@@ -20,7 +24,7 @@ public class OrderControllerTest {
 	 * The thing I want to fake functionality for
 	 */
 	@Mock
-	private CustomerServices customerServices;
+	private OrderServices OrderServices;
 
 	/**
 	 * Spy is used because i want to mock some methods inside the item I'm testing
@@ -29,42 +33,42 @@ public class OrderControllerTest {
 	 */
 	@Spy
 	@InjectMocks
-	private CustomerController customerController;
+	private OrderController OrderController;
 
-//	@Test
-//	public void readAllTest() {
-//		CustomerController customerController = new CustomerController(customerServices);
-//		List<Customer> customers = new ArrayList<>();
-//		customers.add(new Customer("Chris", "P"));
-//		customers.add(new Customer("Rhys", "T"));
-//		customers.add(new Customer("Nic", "J"));
-//		Mockito.when(customerServices.readAll()).thenReturn(customers);
-//		assertEquals(customers, customerController.readAll());
-//	}
+	@Test
+	public void readAllTest() {
+		OrderController customerController = new OrderController(OrderServices);
+		List<Order> iOrder = new ArrayList<>();
+		iOrder.add(new Orders("Chris", "50"));
+		iOrder.add(new Orders("Rhys", "75"));
+		iOrder.add(new Orders("Nic", "100"));
+		Mockito.when(OrderServices.readAll()).thenReturn(iOrder);
+		assertEquals(iOrder, customerController.readAll());
+	}
 
-//	@Test
-//	public void createTest() {
-//		String firstName = "Chris";
-//		String surname = "Perrins";
-//		Mockito.doReturn(firstName, surname).when(customerController).getInput();
-//		Customer customer = new Customer(firstName, surname);
-//		Customer savedCustomer = new Customer(1L, "Chris", "Perrins");
-//		Mockito.when(customerServices.create(customer)).thenReturn(savedCustomer);
-//		assertEquals(savedCustomer, customerController.create());
-//	}
+	@Test
+	public void createTest() {
+		String customer_id = "1";
+		String total_price = "50";
+		Mockito.doReturn(customer_id, total_price).when(OrderController).getInput();
+		Orders customer = new Orders(customer_id, total_price);
+		Orders savedCustomer = new Orders(1L, "Chris", "50");
+		Mockito.when(OrderServices.create(customer)).thenReturn(savedCustomer);
+		assertEquals(savedCustomer, OrderController.create());
+	}
 
 	/**
 	 * 
 	 */
 	@Test
 	public void updateTest() {
-		String customer_id = "1";
-		String name = "Rhys";
-		String address = "Moorside";
-		Mockito.doReturn(customer_id, name, address).when(customerController).getInput();
-		Customers customer = new Customers(1L, name, address);
-		Mockito.when(customerServices.update(customer)).thenReturn(customer);
-		assertEquals(customer, customerController.update());
+		String order_id = "1";
+		String customer_id = "Rhys";
+		String total_price = "75";
+		Mockito.doReturn(order_id, customer_id, total_price).when(OrderController).getInput();
+		Orders customer = new Orders(1L, customer_id, total_price);
+		Mockito.when(OrderServices.update(customer)).thenReturn(customer);
+		assertEquals(customer, OrderController.update());
 	}
 
 	/**
@@ -74,9 +78,9 @@ public class OrderControllerTest {
 	@Test
 	public void deleteTest() {
 		String customer_id = "1";
-		Mockito.doReturn(customer_id).when(customerController).getInput();
-		customerController.delete();
-		Mockito.verify(customerServices, Mockito.times(1)).delete(1L);
+		Mockito.doReturn(customer_id).when(OrderController).getInput();
+		OrderController.delete();
+		Mockito.verify(OrderServices, Mockito.times(1)).delete(1L);
 	}
 
 }
