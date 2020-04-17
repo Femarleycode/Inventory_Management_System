@@ -37,8 +37,7 @@ public class OrderDaoMysql implements Dao<Orders> {
 		Long order_id = resultSet.getLong("order_id");
 		Long customer_id = resultSet.getLong("customer_id");
 		BigDecimal total_price = resultSet.getBigDecimal("total_price");
-		Long item_id = resultSet.getLong("item_id");
-		return new Orders(order_id, customer_id, total_price, item_id);
+		return new Orders(order_id, customer_id, total_price);
 	}
 
 	/**
@@ -46,24 +45,6 @@ public class OrderDaoMysql implements Dao<Orders> {
 	 * 
 	 * @return A list of orders
 	 */
-
-//	public List<Orderline> readItems() {
-//		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
-//				Statement statement = connection.createStatement();
-//				ResultSet resultSet = statement.executeQuery("select * from orderline");) {
-//			ArrayList<Orderline> orderline = new ArrayList<>();
-//			while (resultSet.next()) {
-//				orderline.add(orderlineFromResultSet(resultSet));
-//			}
-//			return orders;
-//		} catch (SQLException e) {
-//			LOGGER.debug(e.getStackTrace());
-//			LOGGER.error(e.getMessage());
-//		}
-//		return new ArrayList<>();
-//
-//		List<Long> item_id = resultSet.getList < Long > ("item_id");
-//	}
 
 	@Override
 	public List<Orders> readAll() {
@@ -104,8 +85,8 @@ public class OrderDaoMysql implements Dao<Orders> {
 	public Orders create(Orders order) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("insert into orders(customer_id, total_price, item_id) values('"
-					+ order.getCustomer_Id() + "','" + order.getTotal_Price() + "','" + order.getItem_Id() + "')");
+			statement.executeUpdate("insert into orders(customer_id, total_price) values('" + order.getCustomer_Id()
+					+ "','" + order.getTotal_Price() + "')");
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -139,8 +120,7 @@ public class OrderDaoMysql implements Dao<Orders> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("update orders set customer_id ='" + order.getCustomer_Id() + "', total_price ='"
-					+ order.getTotal_Price() + "', item_id = '" + order.getItem_Id() + "' where order_id ="
-					+ order.getOrder_Id());
+					+ order.getTotal_Price() + "' where order_id =" + order.getOrder_Id());
 			return readOrder(order.getOrder_Id());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());

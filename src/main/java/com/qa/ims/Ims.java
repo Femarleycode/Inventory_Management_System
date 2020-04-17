@@ -31,9 +31,6 @@ public class Ims {
 
 	public static final Logger LOGGER = Logger.getLogger(Ims.class);
 
-	// add while loop to do multiple commands
-	// add proper exit function
-
 	public void imsSystem() {
 		LOGGER.info("What is your username");
 		String username = Utils.getInput();

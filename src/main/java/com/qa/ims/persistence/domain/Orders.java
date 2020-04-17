@@ -7,20 +7,17 @@ public class Orders {
 	private Long order_id;
 	private Long customer_id;
 	private BigDecimal total_price;
-	private Long item_id;
 	// private List<Long> item_id = new ArrayList<>();
 
-	public Orders(Long customer_id, BigDecimal total_price, Long item_id) {
+	public Orders(Long customer_id, BigDecimal total_price) {
 		this.customer_id = customer_id;
 		this.total_price = total_price;
-		this.item_id = item_id;
 	}
 
-	public Orders(Long order_id, Long customer_id, BigDecimal total_price, Long item_id/* List<Long> item_id */) {
+	public Orders(Long order_id, Long customer_id, BigDecimal total_price) {
 		this.order_id = order_id;
 		this.customer_id = customer_id;
 		this.total_price = total_price;
-		this.item_id = item_id;
 	}
 
 	// order_id
@@ -50,28 +47,17 @@ public class Orders {
 		this.total_price = total_price;
 	}
 
-	// item_id
-	public Long getItem_Id() {
-		return item_id;
-	}
-
-	public void setItem_Id(Long item_id) {
-		this.item_id = item_id;
-	}
-
 	public String toString() {
-		return "order_id:" + order_id + " customer_id:" + customer_id + " total_price:" + total_price + " item_id:"
-				+ item_id;
+		return "order_id:" + order_id + " customer_id:" + customer_id + " total_price:" + total_price;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
 		result = prime * result + ((order_id == null) ? 0 : order_id.hashCode());
+		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
 		result = prime * result + ((total_price == null) ? 0 : total_price.hashCode());
-		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
 		return result;
 	}
 
