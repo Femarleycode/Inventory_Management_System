@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Items {
 
-	private Long item_id;
+	private Long itemId;
 	private String name;
 	private BigDecimal price;
 
@@ -13,18 +13,18 @@ public class Items {
 		this.price = price;
 	}
 
-	public Items(Long item_id, String name, BigDecimal price) {
-		this.item_id = item_id;
+	public Items(Long itemId, String name, BigDecimal price) {
+		this.itemId = itemId;
 		this.name = name;
 		this.price = price;
 	}
 
-	public Long getItem_Id() {
-		return item_id;
+	public Long getItemId() {
+		return itemId;
 	}
 
-	public void setItem_Id(Long item_id) {
-		this.item_id = item_id;
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
 	}
 
 	public String getName() {
@@ -44,7 +44,7 @@ public class Items {
 	}
 
 	public String toString() {
-		return "item_id:" + item_id + " name:" + name + " price:" + price;
+		return "itemId:" + itemId + " name:" + name + " price:" + price;
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class Items {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
+		result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		return result;
 	}
@@ -73,10 +73,10 @@ public class Items {
 		} else if (!name.equals(other.name))
 			return false;
 
-		if (item_id == null) {
-			if (other.item_id != null)
+		if (itemId == null) {
+			if (other.itemId != null)
 				return false;
-		} else if (!item_id.equals(other.item_id))
+		} else if (!itemId.equals(other.itemId))
 			return false;
 
 		if (price == null) {
