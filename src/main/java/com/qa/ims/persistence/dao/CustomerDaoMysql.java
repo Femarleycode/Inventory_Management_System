@@ -33,7 +33,7 @@ public class CustomerDaoMysql implements Dao<Customers> {
 	}
 
 	Customers customerFromResultSet(ResultSet resultSet) throws SQLException {
-		Long customerId = resultSet.getLong("customerId");
+		Long customerId = resultSet.getLong("customer_id");
 		String name = resultSet.getString("name");
 		String address = resultSet.getString("address");
 		return new Customers(customerId, name, address);
@@ -65,7 +65,7 @@ public class CustomerDaoMysql implements Dao<Customers> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement
-						.executeQuery("SELECT * FROM customers ORDER BY customerId DESC LIMIT 1");) {
+						.executeQuery("SELECT * FROM customers ORDER BY customer_id DESC LIMIT 1");) {
 			resultSet.next();
 			return customerFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -98,7 +98,7 @@ public class CustomerDaoMysql implements Dao<Customers> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement
-						.executeQuery("SELECT * FROM customers where customerId = " + customerId);) {
+						.executeQuery("SELECT * FROM customers where customer_id = " + customerId);) {
 			resultSet.next();
 			return customerFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -120,7 +120,7 @@ public class CustomerDaoMysql implements Dao<Customers> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("update customers set name ='" + customer.getName() + "', address ='"
-					+ customer.getAddress() + "' where customerId =" + customer.getCustomerId());
+					+ customer.getAddress() + "' where customer_id =" + customer.getCustomerId());
 			return readCustomer(customer.getCustomerId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -138,7 +138,7 @@ public class CustomerDaoMysql implements Dao<Customers> {
 	public void delete(long customerId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from customers where customerId = " + customerId);
+			statement.executeUpdate("delete from customers where customer_id = " + customerId);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
