@@ -9,7 +9,11 @@ An application to create, read, update and delete records for a phone store
 
 ## Versioning
 
-[SemVer](http://semver.org/) has been used for versioning.
+* [Github](http://github.com) has been used for versioning.
+
+## Kanban board
+
+* [Trello](https://trello.com/b/wW44nMAQ/inventory-management-system) 
 
 ## Authors
 
@@ -26,7 +30,7 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 **Chris Perrins** - *Provided a basis for the project* - [christophperrins](https://github.com/christophperrins), basis can be found [here](https://github.com/christophperrins/ims-demo)
 
 
-**Nicholas Johnson** - *Software trainer - [nickstewarttds](https://github.com/nickrstewarttds)
+**Nicholas Johnson** - *Software trainer* - [nickstewarttds](https://github.com/nickrstewarttds)
 
 **Jordan Harrison** - *Java trainer* - [JHarry444](https://github.com/JHarry444)
 
