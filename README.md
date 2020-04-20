@@ -38,5 +38,9 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 **Christian Redfern** - *Also provided help with Java* - [Chrisctr](https://github.com/Chrisctr)
 
+**David Williams** - *Java support* - [DavidWilliamsQA](https://github.com/DavidWilliamsQA)
+
+**Tawanda Siyamachira** - *Project management advice* - [TSiyamachiraQA](https://github.com/TSiyamachiraQA)
+
 # Inventory Management System
 
